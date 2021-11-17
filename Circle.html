@@ -1,0 +1,41 @@
+<HTML lang="en">
+<BODY>
+
+<canvas id="lab02" width="700px" height = "700px">
+</canvas>
+
+<script>
+    var canvas = document.getElementById('lab02');
+    var ctx = canvas.getContext('2d');
+
+    var x = 100, y = 100;
+    var R = 50;
+    var x0 = 0, y0 = R;
+    var gap = 0, delta = (2 - 2 * R);
+
+    while (y0 >= 0) {
+        ctx.fillRect(x + x0, y - y0, 1, 1);
+        ctx.fillRect(x - x0, y - y0, 1, 1);
+        ctx.fillRect(x - x0, y + y0, 1, 1);
+        ctx.fillRect(x + x0, y + y0, 1, 1);
+
+        gap = 2 * (delta + y0) - 1;
+
+        if (delta < 0 && gap <= 0) {
+            x0++;
+            delta += 2 * x0 + 1;
+            continue;
+        }
+        if (delta > 0 && gap > 0) {
+            y0--;
+            delta -= 2 * y0 + 1;
+            continue;
+        }
+        x0++;
+        delta += 2 * (x0 - y0);
+        y0--;
+    }
+</script>
+
+</BODY>
+</HTML>
